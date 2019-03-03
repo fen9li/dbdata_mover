@@ -9,6 +9,13 @@ source potatos.credential
 # 2nd parameter: $dumpath 
 # The location to dump the databases
 
+if [ "$#" -lt 2 ]; then
+    echo "2 parameters required"
+    echo "1st parameter should be a text file, in which all dumping databases are listed line by line.
+    echo "2nd parameter should be a path, in which the databases will be dumped to. "
+    exit 1
+fi
+
 FILE=$1
 while read LINE
     do { 
