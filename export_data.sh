@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source potato.credential
+source potatos.credential
 #echo ${SOURCE_DB_HOST}
 #echo ${SOURCE_DB_USERNAME}
 #echo ${SOURCE_DB_PASSWORD}
