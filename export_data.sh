@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
-source potato.conf
-echo ${SOURCE_DB_HOST}
-echo ${SOURCE_DB_USERNAME}
-echo ${SOURCE_DB_PASSWORD}
+source potato.credential
+#echo ${SOURCE_DB_HOST}
+#echo ${SOURCE_DB_USERNAME}
+#echo ${SOURCE_DB_PASSWORD}
 
-SQL_QUERY="SHOW DATABASES;"
-echo `mysql --host=${SOURCE_DB_HOST} --user=${SOURCE_DB_USERNAME} --password=${SOURCE_DB_PASSWORD} -e ${SQL_QUERY}`
+FILE=potatos.conf
+while read LINE
+    do { 
+        echo "Dumping database ${LINE}"
+        mysqldump -h ${SOURCE_DB_HOST} -u ${SOURCE_DB_USERNAME} -p${SOURCE_DB_PASSWORD} ${LINE} --databases > ${LINE}_db.dump
+    }
+done < ${FILE}
 
 exit 0
