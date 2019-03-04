@@ -18,7 +18,7 @@ FILE=$1
 while read LINE
     do { 
         echo "Creating database ${LINE}"
-        mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} -e "CREATE DATABASES ${LINE};" 
+        mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} -e "CREATE DATABASE ${LINE};" 
     }
 done < ${FILE}
 
