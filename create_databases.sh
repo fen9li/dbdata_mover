@@ -18,8 +18,10 @@ FILE=$1
 while read LINE
     do { 
         echo "Creating database ${LINE}"
-        mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} -e "CREATE ${LINE};" 
+        mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} -e "CREATE DATABASES ${LINE};" 
     }
 done < ${FILE}
+
+mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} -e "SHOW DATABASES;"
 
 exit 0
