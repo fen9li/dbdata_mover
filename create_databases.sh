@@ -15,7 +15,6 @@ if [ $? -ne 0 ]; then
     exit 2
 fi
 
-
 if [ "$#" -lt 1 ]; then
     echo "One and only one parameter required"
     echo "The parameter should be a text file, which defined databases required to create. "
