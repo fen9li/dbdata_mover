@@ -21,13 +21,10 @@ if [ "$#" -lt 1 ]; then
     exit 3
 fi
 
-mysql -h ${SOURCE_DB_HOST} -u ${SOURCE_DB_USERNAME} -p${SOURCE_DB_PASSWORD} -B -e "SHOW DATABASES;" > ${1}
+# get_all_the_databases
+mysql -h ${SOURCE_DB_HOST} -u ${SOURCE_DB_USERNAME} -p${SOURCE_DB_PASSWORD} -B -e "SHOW DATABASES;" > ${1}.tmp
 
-FILE=${1}
-while read LINE
-    do { 
-        echo ${LINE}
-    }
-done < ${FILE}
+# wash off databases if its name is not start with 'rm3' or 'temp'
+egrep '^rm3|^temp' ${1}.tmp > ${1}
 
 exit 0
