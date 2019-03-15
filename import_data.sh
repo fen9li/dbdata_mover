@@ -4,16 +4,22 @@ source potatos.credential
 #echo ${TARGET_DB_USERNAME}
 #echo ${TARGET_DB_PASSWORD}
 
-# 1st parameter: potatos.conf 
-# The databases are going to be imported, in the format of one database one line
-# 2nd parameter: $dumpath 
-# The location where dumpfiles are saved
+[ -z ${TARGET_DB_HOST} ] && echo "TARGET_DB_HOST is Empty" && exit 1
+[ -z ${TARGET_DB_USERNAME} ] && echo "TARGET_DB_USERNAME is Empty" && exit 1
+[ -z ${SOURCE_DB_PASSWORD} ] && echo "TARGET_DB_PASSWORD is Empty" && exit 1
+
+mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} -e exit > /dev/null 2>&1
+
+if [ $? -ne 0 ]; then
+    echo "User ${TARGET_DB_USERNAME} can not connect to ${TARGET_DB_HOST} ..."
+fi
+exit 2
 
 if [ "$#" -lt 2 ]; then
     echo "2 parameters required"
-    echo "1st parameter should be a text file, in which all importing databases are listed line by line."
-    echo "2nd parameter should be a path, in which all the database dumpfiles are saved. "
-    exit 1
+    echo "1st parameter should be a text file, defined importing databases line by line."
+    echo "2nd parameter should be a path, in which all the database dumpfiles are located. "
+    exit 3
 fi
 
 FILE=$1

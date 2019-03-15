@@ -1,5 +1,5 @@
 # dbdata_mover
-Export / Import data from / into mysql instance data
+Export / Import database data from / into mysql instance
 
 ## clone this repo
 ```
@@ -26,20 +26,23 @@ Unpacking objects: 100% (42/42), done.
  dbdata_mover]$ 
 ```
 
+* edit / double check databases.conf
+This is the database list you want to export data from source DB instance and create databases / import data in target DB instance.
+
 ## export data
 
 ```
-sudo bash export_data.sh [ database_names_list_file ] [ database_dumpfiles_location]
+sudo bash export_data.sh [ /path/to/databases.conf ] [ /path/to/database_dump_location]
 ```
 
-## create databases
+## create databases before you can import data
 
 ```
-sudo bash create_databases.sh [ database_names_list_file ]
+sudo bash create_databases.sh [ /path/to/databases.conf ] 
 ```
 
 ## import data
 
 ```
-sudo bash import_data.sh [ database_names_list_file ] [ database_dumpfiles_location]
+sudo bash import_data.sh [ /path/to/databases.conf ] [ /path/to/database_dump_location]
 ```
