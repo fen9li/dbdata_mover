@@ -12,8 +12,9 @@ mysql -h ${SOURCE_DB_HOST} -u ${SOURCE_DB_USERNAME} -p${SOURCE_DB_PASSWORD} -e e
 
 if [ $? -ne 0 ]; then
     echo "User ${SOURCE_DB_USERNAME} can not connect to ${SOURCE_DB_HOST} ..."
+    exit 2
 fi
-exit 2
+
 
 if [ "$#" -lt 2 ]; then
     echo "2 parameters required"

@@ -12,8 +12,9 @@ mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} -e e
 
 if [ $? -ne 0 ]; then
     echo "User ${TARGET_DB_USERNAME} can not connect to ${TARGET_DB_HOST} ..."
+    exit 2
 fi
-exit 2
+
 
 if [ "$#" -lt 1 ]; then
     echo "One and only one parameter required"
