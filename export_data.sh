@@ -26,8 +26,10 @@ fi
 FILE=$1
 while read LINE
     do { 
-        echo "Dumping database ${LINE}"
+        SECONDS=0
+        echo "Dumping database ${LINE} in seconds ... "
         mysqldump -h ${SOURCE_DB_HOST} -u ${SOURCE_DB_USERNAME} -p${SOURCE_DB_PASSWORD} ${LINE} --databases > ${2}/${LINE}.dump
+        echo $SECONDS
     }
 done < ${FILE}
 

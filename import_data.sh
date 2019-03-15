@@ -26,8 +26,10 @@ fi
 FILE=$1
 while read LINE
     do { 
-        echo "Importing database ${LINE}"
+        SECONDS=0
+        echo "Importing database ${LINE} in seconds ... "
         mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} ${LINE} < ${2}/${LINE}.dump
+        echo $SECONDS
     }
 done < ${FILE}
 
