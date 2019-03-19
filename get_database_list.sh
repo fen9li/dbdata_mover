@@ -15,22 +15,16 @@ if [ $? -ne 0 ]; then
     exit 2
 fi
 
-
-if [ "$#" -lt 2 ]; then
-    echo "2 parameters required"
-    echo "1st parameter should be a text file, defined  dumping databases line by line."
-    echo "2nd parameter should be a path, in which the databases will be dumped to. "
+if [ "$#" -lt 1 ]; then
+    echo "One and only one parameter required"
+    echo "The parameter should be a text file in which database names will be saved. "
     exit 3
 fi
 
-FILE=$1
-while read LINE
-    do { 
-        SECONDS=0
-        echo "Dumping database ${LINE} in seconds ... "
-        mysqldump -h ${SOURCE_DB_HOST} -u ${SOURCE_DB_USERNAME} -p${SOURCE_DB_PASSWORD} ${LINE} --databases > ${2}/${LINE}.dump
-        echo $SECONDS
-    }
-done < ${FILE}
+# get_all_the_databases
+mysql -h ${SOURCE_DB_HOST} -u ${SOURCE_DB_USERNAME} -p${SOURCE_DB_PASSWORD} -B -e "SHOW DATABASES;" > ${1}.tmp
+
+# wash off databases if its name is not start with 'rm3' or 'temp'
+egrep '^rm3|^temp' ${1}.tmp > ${1}
 
 exit 0

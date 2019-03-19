@@ -4,14 +4,23 @@ source potatos.credential
 #echo ${TARGET_DB_USERNAME}
 #echo ${TARGET_DB_PASSWORD}
 
-# 1st parameter: potatos.conf 
-# The databases are going to be created, in the format of one database one line
+[ -z ${TARGET_DB_HOST} ] && echo "TARGET_DB_HOST is Empty" && exit 1
+[ -z ${TARGET_DB_USERNAME} ] && echo "TARGET_DB_USERNAME is Empty" && exit 1
+[ -z ${TARGET_DB_PASSWORD} ] && echo "TARGET_DB_PASSWORD is Empty" && exit 1
+
+mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} -e exit > /dev/null 2>&1
+
+if [ $? -ne 0 ]; then
+    echo "User ${TARGET_DB_USERNAME} can not connect to ${TARGET_DB_HOST} ..."
+    exit 2
+fi
 
 if [ "$#" -lt 1 ]; then
-    echo "1 parameter required"
-    echo "1st parameter should be a text file, in which all creating databases are listed line by line."
-    echo "Use / update potatos.conf if you dont have other ideas."
-    exit 1
+    echo "One and only one parameter required"
+    echo "The parameter should be a text file, which defined databases required to create. "
+    echo "are listed line by line."
+    echo "List databases in the format of one database in one line. Use / update databases.conf as your template."
+    exit 3
 fi
 
 FILE=$1
