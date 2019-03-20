@@ -11,7 +11,7 @@ FILE=$1
 while read LINE; do
     {
         echo "Washing database ${LINE}"
-        sed -i 's/`root`@`localhost`/`c1admin`@`%`/g' ${2}/${LINE}.db
+        sed -i 's/`root`@`localhost`/`c1admin`@`%`/g' ${2}/${LINE}.dump
     }
 done <${FILE}
 
