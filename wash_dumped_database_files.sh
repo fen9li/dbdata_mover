@@ -8,14 +8,11 @@ if [ "$#" -lt 2 ]; then
 fi
 
 FILE=$1
-while read LINE
-    do { 
+while read LINE; do
+    {
         echo "Washing database ${LINE}"
-        
-        mv ${2}/${LINE}.db ${2}/${LINE}.db.tmp 
-        cat ${2}/${LINE}.db.tmp | sed 's|`root`@`localhost`|`c1admin`@`%`|' > ${2}/${LINE}.db
-        rm ${2}/${LINE}.db.tmp
+        sed -i 's/`root`@`localhost`/`c1admin`@`%`/g' ${2}/${LINE}.db
     }
-done < ${FILE}
+done <${FILE}
 
 exit 0

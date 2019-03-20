@@ -51,7 +51,7 @@ sudo bash export_data.sh [ /path/to/databases.conf ] [ /path/to/database_dump_lo
 
 ```
  ~]$ cd dbdata_mover/
- dbdata_mover]$ sudo bash wash_dumped_database_files.sh databases.conf
+ dbdata_mover]$ sudo bash wash_dumped_database_files.sh [ /path/to/databases.conf ] [ /path/to/database_dump_location]
  ...
  dbdata_mover]$ 
 ```
