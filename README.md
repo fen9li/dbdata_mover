@@ -16,7 +16,7 @@ Unpacking objects: 100% (42/42), done.
 ## prepare environment
 
 * copy potatos.template to potatos.credential
-* edit potatos.credential to define database hosts, database username and database password
+* edit potatos.credential to define mysql instance name(host), username and password for source and/or target mysql instance
 
 ```
  ~]$ cd dbdata_mover/
@@ -26,13 +26,34 @@ Unpacking objects: 100% (42/42), done.
  dbdata_mover]$ 
 ```
 
-* edit / double check databases.conf
-This is the database list you want to export data from source DB instance and create databases / import data in target DB instance.
+* run get_database_list.sh against the source mysql instance to get the database list
+
+```
+ ~]$ cd dbdata_mover/
+ dbdata_mover]$ sudo bash get_database_list.sh databases.conf
+ ...
+ dbdata_mover]$ 
+```
+
+* edit / update / double check databases.conf
+This file has the database list you want to export data from source DB instance and delete / create databases / import data in target DB instance.
 
 ## export data
 
 ```
 sudo bash export_data.sh [ /path/to/databases.conf ] [ /path/to/database_dump_location]
+```
+
+## wash dumped databases files
+
+> As dumped database files use 'root' as its username, and AWS RDS mysql instance is using 'c1admin' as its username,
+> you must run this script to wash all the dumped database file to replace any 'root' user with 'c1admin'.
+
+```
+ ~]$ cd dbdata_mover/
+ dbdata_mover]$ sudo bash wash_dumped_database_files.sh databases.conf
+ ...
+ dbdata_mover]$ 
 ```
 
 ## create databases before you can import data
