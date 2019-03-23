@@ -56,6 +56,12 @@ sudo bash export_data.sh [ /path/to/databases.conf ] [ /path/to/database_dump_lo
  dbdata_mover]$ 
 ```
 
+## drop old databases from target mysql instance first
+
+```
+sudo bash drop_databases.sh [ /path/to/databases.conf ] 
+```
+
 ## create databases before you can import data
 
 ```
