@@ -6,7 +6,7 @@ source potatos.credential
 
 [ -z ${TARGET_DB_HOST} ] && echo "TARGET_DB_HOST is Empty" && exit 1
 [ -z ${TARGET_DB_USERNAME} ] && echo "TARGET_DB_USERNAME is Empty" && exit 1
-[ -z ${SOURCE_DB_PASSWORD} ] && echo "TARGET_DB_PASSWORD is Empty" && exit 1
+[ -z ${TARGET_DB_PASSWORD} ] && echo "TARGET_DB_PASSWORD is Empty" && exit 1
 
 mysql -h ${TARGET_DB_HOST} -u ${TARGET_DB_USERNAME} -p${TARGET_DB_PASSWORD} -e exit > /dev/null 2>&1
 
